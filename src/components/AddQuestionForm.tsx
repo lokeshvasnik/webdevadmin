@@ -1,13 +1,26 @@
+import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import supabase from "../backend/supabase";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
+import { toast } from "react-toastify";
 
 const AddQuestionForm = () => {
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState("");
+    const notify = () =>
+        toast("New Question Added", {
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
 
     const addQuestion = async (formData: any) => {
         console.log(formData);
@@ -17,8 +30,7 @@ const AddQuestionForm = () => {
                 .from("questions")
                 .insert([formData])
                 .select();
-
-            alert("Success");
+            notify();
             return data;
         } catch (error: any) {
             setError(error);

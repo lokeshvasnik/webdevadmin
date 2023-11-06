@@ -30,6 +30,7 @@ const navLinks = [
     },
 ];
 
+import React from "react";
 const NavigationBar = () => {
     const [isActive, SetActive] = useState(0);
 
@@ -42,9 +43,7 @@ const NavigationBar = () => {
                         key={index}
                         onClick={() => SetActive(index)}
                         className={`flex space-x-3 p-3 rounded ${
-                            isActive == index
-                                ? "bg-yellow-400   text-black"
-                                : ""
+                            isActive == index ? "bg-yellow-400 text-black" : ""
                         }`}
                     >
                         {navLink.icon}

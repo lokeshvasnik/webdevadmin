@@ -1,7 +1,9 @@
+import React from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteQuestion, getQuestions } from "../backend/Api/questions";
 import { MagnifyingGlass } from "react-loader-spinner";
 import Button from "./Button";
+import { toast } from "react-toastify";
 
 interface Question {
     id: number;
@@ -12,6 +14,17 @@ interface Question {
 
 const ShowQuestions = () => {
     const queryClient = useQueryClient();
+    const notify = () =>
+        toast("Deleted Successfully", {
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     // Fetch Question
     const { data: questions, isLoading } = useQuery({
         queryKey: ["questions"],
@@ -27,6 +40,7 @@ const ShowQuestions = () => {
             queryClient.invalidateQueries({
                 queryKey: ["questions"],
             });
+            notify();
         },
     });
 
