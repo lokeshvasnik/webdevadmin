@@ -84,7 +84,7 @@ const ShowQuestions = () => {
                                 </thead>
                                 <tbody>
                                     {questions?.map((item: Question) => (
-                                        <tr>
+                                        <tr key={item.id}>
                                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <div className="flex">
                                                     <div className="ml-3">
