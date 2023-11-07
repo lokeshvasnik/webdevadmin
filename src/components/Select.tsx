@@ -1,8 +1,14 @@
 import React, { useId } from "react";
 
+interface SelectProps {
+    options: string[];
+    label: string;
+    className?: string;
+}
+
 const Select = (
-    { options, label, className = "", ...props }: any,
-    ref: any
+    { options, label, className = "", ...props }: SelectProps,
+    ref: React.Ref<HTMLSelectElement>
 ) => {
     const id = useId();
 

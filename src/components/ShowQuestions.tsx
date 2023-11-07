@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteQuestion, getQuestions } from "../backend/Api/questions";
 import { MagnifyingGlass } from "react-loader-spinner";
@@ -25,15 +24,14 @@ const ShowQuestions = () => {
             progress: undefined,
             theme: "colored",
         });
+
     // Fetch Question
     const { data: questions, isLoading } = useQuery({
         queryKey: ["questions"],
         queryFn: getQuestions,
     });
 
-    console.log(questions);
     // Mutate question
-
     const { mutate } = useMutation({
         mutationFn: (id: number) => deleteQuestion(id),
         onSuccess: () => {
@@ -107,8 +105,9 @@ const ShowQuestions = () => {
                                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                 <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                                     <Button
-                                                        bgColor="bg-red-400"
+                                                        bgColor="bg-red-400 hover:bg-red-500"
                                                         className="relative"
+                                                        type="button"
                                                         onClick={() =>
                                                             mutate(item.id)
                                                         }

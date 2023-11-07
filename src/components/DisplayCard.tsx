@@ -1,10 +1,15 @@
-const DisplayCard = ({ title, amount, className = "" }: any) => {
-    return (
-        <div className={`border w-60 p-5 rounded-md my-2 ${className}`}>
-            <p>{title}</p>
-            <p className="font-bold text-3xl mt-2 tracking-widest">{amount}</p>
-        </div>
-    );
+interface DisplayCardProps {
+  title: string;
+  amount: string;
+  className?: string;
+}
+const DisplayCard = ({ title, amount, className }: DisplayCardProps) => {
+  return (
+    <div className={`my-2 w-60 rounded-md border p-5 ${className}`}>
+      <p>{title}</p>
+      <p className="mt-2 text-3xl font-bold tracking-widest">{amount}</p>
+    </div>
+  );
 };
 
 export default DisplayCard;

@@ -1,11 +1,10 @@
+import { NavLink } from "react-router-dom";
 import {
     LayoutDashboard,
     Clock3,
     ArrowRightLeft,
     BarChart2,
 } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const navLinks = [
     {
@@ -29,26 +28,23 @@ const navLinks = [
         title: "Goal",
     },
 ];
-
-import React from "react";
 const NavigationBar = () => {
-    const [isActive, SetActive] = useState(0);
-
     return (
         <div className="px-10 p-12 flex flex-col  border-r w-1/5 h-screen">
-            <div className="mt-10 flex flex-col space-y-8">
+            <div className="flex flex-col space-y-8">
                 {navLinks.map((navLink, index) => (
-                    <Link
+                    <NavLink
                         to={navLink.to}
                         key={index}
-                        onClick={() => SetActive(index)}
-                        className={`flex space-x-3 p-3 rounded ${
-                            isActive == index ? "bg-yellow-400 text-black" : ""
-                        }`}
+                        className={({ isActive }) =>
+                            isActive
+                                ? "bg-yellow-400 text-black flex p-3 space-x-3 rounded shadow-md transition-all"
+                                : "flex p-3 space-x-3  rounded shadow-md transition"
+                        }
                     >
                         {navLink.icon}
                         <span>{navLink.title}</span>
-                    </Link>
+                    </NavLink>
                 ))}
             </div>
         </div>

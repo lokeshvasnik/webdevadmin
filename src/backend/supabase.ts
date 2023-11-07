@@ -9,8 +9,6 @@ if (!supabaseKey) {
     );
 }
 
-console.log(supabaseKey);
-
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default supabase;

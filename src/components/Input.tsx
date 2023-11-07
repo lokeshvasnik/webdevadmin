@@ -1,8 +1,14 @@
 import React, { useId } from "react";
 
+interface InputProps {
+    label: string;
+    type?: string;
+    className?: string;
+}
+
 const Input = (
-    { label, type = "text", className = "", ...props }: any,
-    ref: any
+    { label, type = "text", className = "", ...props }: InputProps,
+    ref: React.LegacyRef<HTMLInputElement> | undefined
 ): any => {
     const id = useId();
     return (

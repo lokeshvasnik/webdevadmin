@@ -4,20 +4,20 @@ import NavigationBar from "../NavigationBar";
 import Header from "../Header";
 
 const Layout = () => {
-    return (
-        <>
-            <Header />
-            <div className="flex bg-[#434343] text-white">
-                {/* Header */}
-                {/* Sidebar */}
-                <NavigationBar />
-                {/* Outlet */}
-                <div className="w-full mt-10 px-5  justify-center items-center">
-                    <Outlet />
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <main className="flex bg-[#434343] text-white">
+        {/* Header */}
+        {/* Sidebar */}
+        <NavigationBar />
+        {/* Outlet */}
+        <section className="mt-10 w-full items-center  justify-center px-5">
+          <Outlet />
+        </section>
+      </main>
+    </>
+  );
 };
 
 export default Layout;
