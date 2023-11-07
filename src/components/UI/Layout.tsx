@@ -12,7 +12,7 @@ const Layout = () => {
                 {/* Sidebar */}
                 <NavigationBar />
                 {/* Outlet */}
-                <div className="w-full mt-10  justify-center items-center">
+                <div className="w-full mt-10 px-5  justify-center items-center">
                     <Outlet />
                 </div>
             </div>

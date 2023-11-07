@@ -1,8 +1,8 @@
 const Button = ({
     children,
     type = "button",
-    bgColor = "bg-blue-600",
-    textColor = "text-white",
+    bgColor = "bg-yellow-400",
+    textColor = "text-black",
     onHover = "",
     className = "",
     ...props

@@ -22,7 +22,6 @@ const Question = () => {
             <Button
                 bgColor="bg-yellow-300"
                 textColor="text-black"
-                className="mx-2"
                 onClick={handleAddQuestionClick}
                 onHover="hover:bg-yellow-600"
             >
