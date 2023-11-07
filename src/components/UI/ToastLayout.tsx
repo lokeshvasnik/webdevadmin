@@ -1,6 +1,6 @@
 import { Slide, ToastContainer } from "react-toastify";
 
-const Toast = () => {
+const ToasLayout = () => {
   return (
     <ToastContainer
       position="bottom-right"
@@ -18,4 +18,4 @@ const Toast = () => {
   );
 };
 
-export default Toast;
+export default ToasLayout;

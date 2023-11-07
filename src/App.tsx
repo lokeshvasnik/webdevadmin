@@ -4,7 +4,7 @@ import Layout from "./components/UI/Layout";
 import Achievement from "./components/Achievement";
 import Goal from "./components/Goal";
 import Question from "./components/Question";
-import Toast from "./components/UI/Toast";
+import ToastLayout from "./components/UI/ToastLayout";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="questions" element={<Question />} />
         </Route>
       </Routes>
-      <Toast />
+      <ToastLayout />
     </Router>
   );
 }
