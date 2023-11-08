@@ -2,29 +2,18 @@ import { useForm } from "react-hook-form";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
-import { toast } from "react-toastify";
+import { notify } from "./UI/toast";
 import { useMutation } from "@tanstack/react-query";
 import { addQuestion } from "../backend/Api/questions";
 
 const AddQuestionForm = () => {
   const { register, handleSubmit } = useForm();
-  const notify = () =>
-    toast("New Question Added", {
-      position: "bottom-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
 
   // Mutate question
   const { mutate } = useMutation({
     mutationFn: (formData: object) => addQuestion(formData),
     onSuccess: () => {
-      notify();
+      notify("Deleted Successfully");
     },
   });
 

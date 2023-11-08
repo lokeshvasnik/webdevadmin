@@ -1,12 +1,3 @@
-interface ButtonProps {
-  type?: string;
-  bgColor?: string;
-  textColor?: string;
-  onHover?: string;
-  className?: string;
-  children?: string;
-  onClick?: () => void;
-}
 const Button = ({
   children,
   type = "button",
@@ -14,12 +5,10 @@ const Button = ({
   textColor = "text-black",
   onHover = "",
   className = "",
-  onClick,
   ...props
-}: ButtonProps) => {
+}: any) => {
   return (
     <button
-      onClick={onClick}
       className={` hover:${onHover} rounded-md px-4 py-2 transition ${bgColor} ${textColor} ${className}`}
       {...props}
     >

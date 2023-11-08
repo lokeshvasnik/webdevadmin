@@ -5,3 +5,8 @@ export const addTopic = async (formData: object) => {
 
   return data;
 };
+
+export const getTopics = async () => {
+  const { data } = await supabase.from("topics").select("*");
+  return data;
+};

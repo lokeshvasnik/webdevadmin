@@ -1,18 +1,36 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { addTopic } from "../backend/Api/topics";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addTopic, getTopics } from "../backend/Api/topics";
+import { getQuestions } from "../backend/Api/questions";
+import { notify } from "./UI/toast";
 import DisplayCard from "./DisplayCard";
 import Button from "./Button";
 import Input from "./Input";
-import { notify } from "./UI/toast";
+
 const Dashboard = () => {
   const { register, handleSubmit } = useForm();
+  const queryClient = useQueryClient();
+
+  // Fetch Question
+  const { data: topics } = useQuery({
+    queryKey: ["topics"],
+    queryFn: getTopics,
+  });
+
+  // Fetch Question
+  const { data: questions } = useQuery({
+    queryKey: ["questions"],
+    queryFn: getQuestions,
+  });
 
   // Mutate question
   const { mutate } = useMutation({
     mutationFn: (formData: object) => addTopic(formData),
     onSuccess: () => {
-      notify("Title Added");
+      queryClient.invalidateQueries({
+        queryKey: ["topics"],
+      });
+      notify("Topic Added");
     },
   });
 
@@ -20,13 +38,18 @@ const Dashboard = () => {
     mutate(formData);
   };
 
+  let topicsNumber: number | undefined = topics?.length;
+  let totalQuestion = questions?.length;
+
   return (
     <div>
       <div className="flex flex-wrap space-x-5">
-        <DisplayCard title="Total Question Solved" amount="50" />
-        <DisplayCard title="Total Topics" amount="600" />
-        <DisplayCard title="Total Topics" amount="600" />
-        <DisplayCard title="Total Topics" amount="600" />
+        <DisplayCard
+          link="/questions"
+          title="Total Question Solved"
+          amount={totalQuestion}
+        />
+        <DisplayCard link="/" title="Total Topics" amount={topicsNumber} />
       </div>
       <div>
         <Button className="my-5">Add New Topic</Button>
