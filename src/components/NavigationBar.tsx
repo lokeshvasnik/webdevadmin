@@ -4,7 +4,6 @@ import {
   Clock3,
   ArrowRightLeft,
   BarChart2,
-  LogOut,
 } from "lucide-react";
 import Button from "./Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
