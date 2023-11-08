@@ -1,59 +1,71 @@
+import { NavLink, useNavigate } from "react-router-dom";
 import {
-    LayoutDashboard,
-    Clock3,
-    ArrowRightLeft,
-    BarChart2,
+  LayoutDashboard,
+  Clock3,
+  ArrowRightLeft,
+  BarChart2,
+  LogOut,
 } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import Button from "./Button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { logout } from "../backend/Api/login";
 
 const navLinks = [
-    {
-        to: "/",
-        icon: <LayoutDashboard />,
-        title: "Home",
-    },
-    {
-        to: "/questions",
-        icon: <Clock3 />,
-        title: "Questions",
-    },
-    {
-        to: "/achievements",
-        icon: <BarChart2 />,
-        title: "Acheivments",
-    },
-    {
-        to: "/goals",
-        icon: <ArrowRightLeft />,
-        title: "Goal",
-    },
+  {
+    to: "/",
+    icon: <LayoutDashboard />,
+    title: "Home",
+  },
+  {
+    to: "/questions",
+    icon: <Clock3 />,
+    title: "Questions",
+  },
+  {
+    to: "/achievements",
+    icon: <BarChart2 />,
+    title: "Acheivments",
+  },
+  {
+    to: "/goals",
+    icon: <ArrowRightLeft />,
+    title: "Goal",
+  },
 ];
-
 const NavigationBar = () => {
-    const [isActive, SetActive] = useState(0);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-    return (
-        <div className="px-10 p-12 flex flex-col  border-r w-1/5 h-screen">
-            <div className="mt-10 flex flex-col space-y-8">
-                {navLinks.map((navLink, index) => (
-                    <Link
-                        to={navLink.to}
-                        key={index}
-                        onClick={() => SetActive(index)}
-                        className={`flex space-x-3 p-3 rounded ${
-                            isActive == index
-                                ? "bg-yellow-400   text-black"
-                                : ""
-                        }`}
-                    >
-                        {navLink.icon}
-                        <span>{navLink.title}</span>
-                    </Link>
-                ))}
-            </div>
-        </div>
-    );
+  const { mutate } = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      queryClient.removeQueries();
+      navigate("/login", { replace: true });
+    },
+  });
+  return (
+    <div className="flex h-screen w-1/5 flex-col  border-r p-12 px-10">
+      <div className="flex flex-col space-y-8">
+        {navLinks.map((navLink, index) => (
+          <NavLink
+            to={navLink.to}
+            key={index}
+            className={({ isActive }) =>
+              isActive
+                ? "flex space-x-3 rounded bg-yellow-400 p-3 text-black shadow-md transition-all"
+                : "flex space-x-3 rounded  p-3 shadow-md transition"
+            }
+          >
+            {navLink.icon}
+            <span>{navLink.title}</span>
+          </NavLink>
+        ))}
+        <Button className="bg-red-600" onClick={() => mutate()}>
+          Logout
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default NavigationBar;
