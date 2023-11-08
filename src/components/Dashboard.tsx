@@ -51,9 +51,10 @@ const Dashboard = () => {
         />
         <DisplayCard link="/" title="Total Topics" amount={topicsNumber} />
       </div>
-      <div>
-        <Button className="my-5">Add New Topic</Button>
-      </div>
+
+      <h1 className="my-3  text-2xl font-bold uppercase tracking-widest">
+        add new question
+      </h1>
 
       <form
         onSubmit={handleSubmit(onSubmitHandler)}

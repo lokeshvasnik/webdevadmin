@@ -22,38 +22,43 @@ const AddQuestionForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmitHandler)}
-      className="mb-4 w-80 rounded bg-yellow-500 px-8 pb-8 pt-6 shadow-md"
-    >
-      {/* SELECT TITLE */}
-      <Input
-        label="Title"
-        {...register("question", {
-          required: true,
-        })}
-        className="mb-3"
-      />
-      {/* SELECT TOPIC  */}
-      <Select
-        label="Select Topic"
-        options={["Arrays", "Strings", "Linked List"]}
-        {...register("topic")}
-      />
-      {/* SELECT DIFFICULTY */}
-      <Select
-        label="Select Difficulty"
-        options={["Easy", "Medium", "Hard"]}
-        {...register("level")}
-      />
-      <Button
-        type="submit"
-        bgColor="bg-[#434343] text-white"
-        onHover="bg-yellow-800"
+    <>
+      <h1 className="my-3 text-2xl font-bold uppercase tracking-widest">
+        add new question
+      </h1>
+      <form
+        onSubmit={handleSubmit(onSubmitHandler)}
+        className="mb-4 w-80 rounded bg-yellow-500 px-8 pb-8 pt-6 shadow-md"
       >
-        Add
-      </Button>
-    </form>
+        {/* SELECT TITLE */}
+        <Input
+          label="Title"
+          {...register("question", {
+            required: true,
+          })}
+          className="mb-3"
+        />
+        {/* SELECT TOPIC  */}
+        <Select
+          label="Select Topic"
+          options={["Arrays", "Strings", "Linked List"]}
+          {...register("topic")}
+        />
+        {/* SELECT DIFFICULTY */}
+        <Select
+          label="Select Difficulty"
+          options={["Easy", "Medium", "Hard"]}
+          {...register("level")}
+        />
+        <Button
+          type="submit"
+          bgColor="bg-[#434343] text-white"
+          onHover="bg-yellow-800"
+        >
+          Add
+        </Button>
+      </form>
+    </>
   );
 };
 
