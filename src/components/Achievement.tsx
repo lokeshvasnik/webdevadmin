@@ -4,7 +4,6 @@ import { BaseEditor } from "slate";
 import { Editable, ReactEditor } from "slate-react";
 import { createEditor, Descendant } from "slate";
 import { Slate, withReact } from "slate-react";
-import supabase from "../backend/supabase";
 type CustomElement = { type: "paragraph"; children: CustomText[] };
 type CustomText = { text: string; bold?: true };
 
