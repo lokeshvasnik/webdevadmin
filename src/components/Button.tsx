@@ -1,7 +1,7 @@
 const Button = ({
   children,
   type = "button",
-  bgColor = "bg-yellow-400",
+  bgColor = "",
   textColor = "text-black",
   onHover = "",
   className = "",
@@ -9,7 +9,7 @@ const Button = ({
 }: any) => {
   return (
     <button
-      className={` hover:${onHover} rounded-md px-4 py-2 transition ${bgColor} ${textColor} ${className}`}
+      className={` hover:${onHover}  rounded-md px-4 py-2 transition ${bgColor} ${textColor} ${className}`}
       {...props}
     >
       {children}

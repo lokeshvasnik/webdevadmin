@@ -4,6 +4,7 @@ import {
   Clock3,
   ArrowRightLeft,
   BarChart2,
+  PauseCircle,
 } from "lucide-react";
 import Button from "./Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,6 +15,11 @@ const navLinks = [
     to: "/",
     icon: <LayoutDashboard />,
     title: "Home",
+  },
+  {
+    to: "/topics",
+    icon: <PauseCircle />,
+    title: "Topics",
   },
   {
     to: "/questions",
@@ -59,7 +65,7 @@ const NavigationBar = () => {
             <span>{navLink.title}</span>
           </NavLink>
         ))}
-        <Button className="bg-red-600" onClick={() => mutate()}>
+        <Button bgColor="bg-red-400" onClick={() => mutate()}>
           Logout
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../backend/Api/useUser";
+import { useUser } from "../../backend/hooks/useUser";
 import { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 

@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
+import { useForm } from "react-hook-form";
 import { notify } from "./UI/toast";
 import { useMutation } from "@tanstack/react-query";
 import { addQuestion } from "../backend/Api/questions";
@@ -13,7 +13,7 @@ const AddQuestionForm = () => {
   const { mutate } = useMutation({
     mutationFn: (formData: object) => addQuestion(formData),
     onSuccess: () => {
-      notify("Deleted Successfully");
+      notify("New Topic Added");
     },
   });
 

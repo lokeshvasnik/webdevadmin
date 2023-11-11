@@ -43,13 +43,25 @@ const ShowQuestions = () => {
     <div className="overflow-hidden">
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
-          <Button onClick={() => setData("All")} className="mx-2">
+          <Button
+            onClick={() => setData("All")}
+            bgColor="bg-red-400"
+            className="mx-2"
+          >
             All
           </Button>
-          <Button onClick={() => setData("Medium")} className="mx-2">
+          <Button
+            onClick={() => setData("Medium")}
+            bgColor="bg-red-400"
+            className="mx-2"
+          >
             Medium
           </Button>
-          <Button onClick={() => setData("Easy")} className="mx-2">
+          <Button
+            onClick={() => setData("Easy")}
+            bgColor="bg-red-400"
+            className="mx-2"
+          >
             Easy
           </Button>
 
