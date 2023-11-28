@@ -34,6 +34,9 @@ const Login = () => {
         web dev admin
       </h1>
       <div className="mx-auto my-10 w-96 rounded border bg-white p-10 text-black">
+        <div>
+          <p className="text-center text-2xl">Hi Admin</p>
+        </div>
         <form onSubmit={handleSubmit(loginHandler)}>
           <label htmlFor="email">Email</label>
           <Input
@@ -47,7 +50,14 @@ const Login = () => {
             {...register("password")}
             className="my-2 border text-black"
           />
-          <Button>Login</Button>
+          <div className="my-5 flex items-center justify-between">
+            <p className="delay-10 cursor-pointer rounded-sm  p-2 hover:font-bold text-gray-700  transition  hover:bg-yellow-100">
+              Forgot Password?
+            </p>
+            <Button className="bg-yellow-400 shadow-md hover:bg-yellow-300">
+              Login
+            </Button>
+          </div>
         </form>
       </div>
     </div>
