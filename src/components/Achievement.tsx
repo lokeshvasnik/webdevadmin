@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import {
-  useMutation,
-  MutateFunction,
-  MutationFunction,
-} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { updateBlog } from "../backend/Api/blogs";
 import { useBlog } from "../backend/hooks/useBlog";
 import ReactQuill from "react-quill";
