@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../backend/Api/useUser";
+import { useUser } from "../../backend/hooks/useUser";
 import { useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -7,7 +7,6 @@ const ProtectedRoute = ({ children }: any) => {
   // 1. load the authenticated user
   const navigate = useNavigate();
   const { isLoading, isAuthenticated } = useUser();
-  console.log(isAuthenticated);
 
   useEffect(
     function () {

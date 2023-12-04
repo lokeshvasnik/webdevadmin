@@ -1,34 +1,59 @@
-// This example is for an Editor with `ReactEditor` and `HistoryEditor`
 import { useState } from "react";
-import { BaseEditor } from "slate";
-import { Editable, ReactEditor } from "slate-react";
-import { createEditor, Descendant } from "slate";
-import { Slate, withReact } from "slate-react";
-type CustomElement = { type: "paragraph"; children: CustomText[] };
-type CustomText = { text: string; bold?: true };
+import { useSearchParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { updateBlog } from "../backend/Api/blogs";
+import { useBlog } from "../backend/hooks/useBlog";
+import ReactQuill from "react-quill";
+import Button from "./Button";
+import Card from "./UI/Card";
+import "react-quill/dist/quill.snow.css";
 
-declare module "slate" {
-  interface CustomTypes {
-    Editor: BaseEditor & ReactEditor;
-    Element: CustomElement;
-    Text: CustomText;
-  }
-}
-
-const initialValue: Descendant[] = [
-  {
-    type: "paragraph",
-    children: [{ text: "A line of text in a paragraph." }],
-  },
-];
 
 const Achievement = () => {
-  const [editor] = useState(() => withReact(createEditor()));
+  const { data } = useBlog();
+  const [value, setValue] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleClick = (id: string, content: string) => {
+    searchParams.set("blog", id);
+    setSearchParams(searchParams);
+    setValue(content);
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: updateBlog,
+  });
+  const blogId = searchParams.get("blog");
+  const onUpdateHandler = (blogData: string) => {
+    const blogDataObj = {
+      content: blogData,
+      id: blogId,
+    };
+
+    mutate(blogDataObj);
+  };
 
   return (
-    <Slate editor={editor} initialValue={initialValue}>
-      <Editable />
-    </Slate>
+    <>
+      <div className="grid grid-flow-col grid-cols-4 gap-40">
+        {data?.map((blog) => (
+          <Card
+            onClick={() => handleClick(blog.id, blog.content)}
+            title={blog.content}
+          />
+        ))}
+      </div>
+      <div className=" bg-white text-black">
+        <ReactQuill theme="snow" value={value} onChange={setValue} />
+      </div>
+      <Button
+        onClick={() => onUpdateHandler(value)}
+        bgColor="bg-yellow-400"
+        className="my-2"
+      >
+        Upload
+      </Button>
+    </>
   );
 };
 

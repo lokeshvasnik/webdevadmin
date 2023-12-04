@@ -7,6 +7,7 @@ import Question from "./components/Question";
 import ToastLayout from "./components/UI/ToastLayout";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/UI/ProtectedRoute";
+import Topic from "./components/Topic";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="goals" element={<Goal />} />
           <Route path="achievements" element={<Achievement />} />
           <Route path="questions" element={<Question />} />
+          <Route path="topics" element={<Topic />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>

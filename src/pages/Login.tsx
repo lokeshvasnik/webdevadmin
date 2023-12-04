@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
-import Button from "../components/Button";
-import Input from "../components/Input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { notify } from "../components/UI/toast";
 import { loginUser } from "../backend/Api/login";
-import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { loginUsingGoogle } from "../backend/Api/login";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -12,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // Mutate question
-  const { mutate } = useMutation({
+  const { mutate: useEmailLogin } = useMutation({
     mutationFn: (formData: object) => loginUser(formData),
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
@@ -24,8 +26,20 @@ const Login = () => {
     },
   });
 
+  const { mutate: useGoogleLogin } = useMutation({
+    mutationFn: (response: any) => loginUsingGoogle(response),
+    onSuccess: (user) => {
+      queryClient.setQueryData(["user"], user.user);
+      navigate("/");
+      notify("Logged In");
+    },
+    onError: (error) => {
+      notify(error.message);
+    },
+  });
+
   const loginHandler = async (formData: any) => {
-    mutate(formData);
+    useEmailLogin(formData);
   };
 
   return (
@@ -34,6 +48,9 @@ const Login = () => {
         web dev admin
       </h1>
       <div className="mx-auto my-10 w-96 rounded border bg-white p-10 text-black">
+        <div>
+          <p className="text-center text-2xl">Hi Admin</p>
+        </div>
         <form onSubmit={handleSubmit(loginHandler)}>
           <label htmlFor="email">Email</label>
           <Input
@@ -47,7 +64,23 @@ const Login = () => {
             {...register("password")}
             className="my-2 border text-black"
           />
-          <Button>Login</Button>
+          <div className="my-5 flex flex-col items-center justify-center space-y-5">
+            {/* <p className="delay-10 cursor-pointer rounded-sm  p-2 text-gray-700 transition  hover:bg-yellow-100  hover:font-bold">
+              Forgot Password?
+            </p> */}
+            <Button className="bg-yellow-400 shadow-md hover:bg-yellow-300">
+              Login
+            </Button>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                useGoogleLogin(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+              useOneTap
+            />
+          </div>
         </form>
       </div>
     </div>
