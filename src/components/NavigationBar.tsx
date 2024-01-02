@@ -1,14 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
-  Clock3,
   ArrowRightLeft,
   BarChart2,
   PauseCircle,
+  ProjectorIcon,
 } from "lucide-react";
 import Button from "./Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { logout } from "../backend/Api/login";
+import { logout } from "../lib/backend/actions/login";
+import toast from "react-hot-toast";
 
 const navLinks = [
   {
@@ -17,15 +18,15 @@ const navLinks = [
     title: "Home",
   },
   {
-    to: "/topics",
+    to: "/profile",
     icon: <PauseCircle />,
-    title: "Topics",
+    title: "Profile",
   },
-  {
-    to: "/questions",
-    icon: <Clock3 />,
-    title: "Questions",
-  },
+  // {
+  //   to: "/questions",
+  //   icon: <Clock3 />,
+  //   title: "Questions",
+  // },
   {
     to: "/achievements",
     icon: <BarChart2 />,
@@ -35,6 +36,11 @@ const navLinks = [
     to: "/goals",
     icon: <ArrowRightLeft />,
     title: "Goal",
+  },
+  {
+    to: "/projects",
+    icon: <ProjectorIcon />,
+    title: "Projects",
   },
 ];
 const NavigationBar = () => {
@@ -46,6 +52,9 @@ const NavigationBar = () => {
     onSuccess: () => {
       queryClient.removeQueries();
       navigate("/login", { replace: true });
+      toast.success("Logged Out.", {
+        position: "bottom-center",
+      });
     },
   });
   return (

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import Input from "./Input";
 import Button from "./Button";
-import { useTopic } from "../backend/hooks/useTopic";
+import { useTopic } from "../lib/backend/hooks/useTopic";
 import { MagnifyingGlass } from "react-loader-spinner";
 
 interface TopicProps {

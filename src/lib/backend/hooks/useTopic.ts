@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addTopic, deleteTopic, getTopics } from "../Api/topics";
-import { notify } from "../../components/UI/toast";
+import { addTopic, deleteTopic, getTopics } from "../actions/topics";
+import toast from "react-hot-toast";
 
 export const useTopic = () => {
   const queryClient = useQueryClient();
@@ -18,7 +18,7 @@ export const useTopic = () => {
       queryClient.invalidateQueries({
         queryKey: ["topics"],
       });
-      notify("Topic Added");
+      toast.success("Topic Added");
     },
   });
 
@@ -28,7 +28,7 @@ export const useTopic = () => {
       queryClient.invalidateQueries({
         queryKey: ["topics"],
       });
-      notify("Deleted Successfully");
+      toast.success("Deleted Successfully");
     },
   });
   return { isLoading, topics, mutate, deleteMutate };

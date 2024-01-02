@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Toaster } from "react-hot-toast";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <GoogleOAuthProvider clientId={clientId}>
     <QueryClientProvider client={queryClient}>
       <App />
+      <Toaster />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
     ,

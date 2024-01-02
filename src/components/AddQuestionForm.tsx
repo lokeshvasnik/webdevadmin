@@ -2,18 +2,21 @@ import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
 import { useForm } from "react-hook-form";
-import { notify } from "./UI/toast";
+import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { addQuestion } from "../backend/Api/questions";
+import { addQuestion } from "../lib/backend/actions/questions";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AddQuestionForm = () => {
   const { register, handleSubmit } = useForm();
 
   // Mutate question
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (formData: object) => addQuestion(formData),
     onSuccess: () => {
-      notify("New Topic Added");
+      toast.success("Added Questions.", {
+        position: "bottom-center",
+      });
     },
   });
 
@@ -52,9 +55,14 @@ const AddQuestionForm = () => {
         />
         <Button
           type="submit"
+          className="flex items-center justify-center"
           bgColor="bg-[#434343] text-white"
           onHover="bg-yellow-800"
+          disabled={isPending}
         >
+          {isPending && (
+            <ClipLoader className="mx-1" size={19} color="#36d7b7" />
+          )}
           Add
         </Button>
       </form>

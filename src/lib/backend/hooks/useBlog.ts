@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBlogs } from "../Api/blogs";
+import { getBlogs } from "../actions/blogs";
 
 export const useBlog = () => {
   // Fetch Question

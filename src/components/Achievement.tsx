@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { updateBlog } from "../backend/Api/blogs";
-import { useBlog } from "../backend/hooks/useBlog";
+import { updateBlog } from "../lib/backend/actions/blogs";
+import { useBlog } from "../lib/backend/hooks/useBlog";
 import ReactQuill from "react-quill";
 import Button from "./Button";
 import Card from "./UI/Card";
 import "react-quill/dist/quill.snow.css";
-
 
 const Achievement = () => {
   const { data } = useBlog();

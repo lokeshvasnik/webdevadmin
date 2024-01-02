@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getQuestions } from "../backend/Api/questions";
+import { getQuestions } from "../lib/backend/actions/questions";
 import { MagnifyingGlass } from "react-loader-spinner";
 import Button from "./Button";
 import QuestionsTable from "./QuestionsTable";

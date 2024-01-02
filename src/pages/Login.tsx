@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { notify } from "../components/UI/toast";
-import { loginUser } from "../backend/Api/login";
+import { loginUser } from "../lib/backend/actions/login";
 import { GoogleLogin } from "@react-oauth/google";
-import { loginUsingGoogle } from "../backend/Api/login";
+import { loginUsingGoogle } from "../lib/backend/actions/login";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -19,10 +19,14 @@ const Login = () => {
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
       navigate("/");
-      notify("Logged In");
+      toast.success("Logged In.", {
+        position: "bottom-center",
+      });
     },
     onError: (error) => {
-      notify(error.message);
+      toast.error(error.message, {
+        position: "bottom-center",
+      });
     },
   });
 
@@ -31,10 +35,14 @@ const Login = () => {
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
       navigate("/");
-      notify("Logged In");
+      toast.success("Logged In.", {
+        position: "bottom-center",
+      });
     },
     onError: (error) => {
-      notify(error.message);
+      toast.error(error.message, {
+        position: "bottom-center",
+      });
     },
   });
 

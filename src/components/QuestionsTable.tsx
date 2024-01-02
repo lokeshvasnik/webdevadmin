@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteQuestion } from "../backend/Api/questions";
-import { notify } from "./UI/toast";
+import { deleteQuestion } from "../lib/backend/actions/questions";
 import Button from "./Button";
+import toast from "react-hot-toast";
 
 interface Question {
   id: number;
@@ -19,7 +19,9 @@ const QuestionsTable = ({ questions }: any) => {
       queryClient.invalidateQueries({
         queryKey: ["questions"],
       });
-      notify("Deleted Successfully");
+      toast.success("Deleted", {
+        position: "bottom-center",
+      });
     },
   });
 

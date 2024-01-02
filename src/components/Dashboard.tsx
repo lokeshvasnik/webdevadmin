@@ -1,33 +1,41 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTopics } from "../backend/Api/topics";
-import { getQuestions } from "../backend/Api/questions";
-import DisplayCard from "./DisplayCard";
+import ProjectCards from "./ProjectCards";
+import { getProjects } from "../lib/backend/actions/projects";
 
 const Dashboard = () => {
-  // Fetch Question
-  const { data: topics } = useQuery({
-    queryKey: ["topics"],
-    queryFn: getTopics,
+  // Fetch Projects
+  const { data: project } = useQuery({
+    queryKey: ["projects"],
+    queryFn: getProjects,
   });
 
-  // Fetch Question
-  const { data: questions } = useQuery({
-    queryKey: ["questions"],
-    queryFn: getQuestions,
-  });
+  console.log(project);
 
-  let topicsNumber: number | undefined = topics?.length;
-  let totalQuestion = questions?.length;
+  // Fetch Question
+  // const { data: topics } = useQuery({
+  //   queryKey: ["topics"],
+  //   queryFn: getTopics,
+  // });
+
+  // // Fetch Question
+  // const { data: questions } = useQuery({
+  //   queryKey: ["questions"],
+  //   queryFn: getQuestions,
+  // });
+
+  // let topicsNumber: number | undefined = topics?.length;
+  // let totalQuestion = questions?.length;
 
   return (
     <div>
       <div className="flex flex-wrap space-x-5">
-        <DisplayCard
+        <ProjectCards data={project} />
+        {/* <DisplayCard
           link="/questions"
           title="Total Question Solved"
           amount={totalQuestion}
-        />
-        <DisplayCard link="/" title="Total Topics" amount={topicsNumber} />
+        /> */}
+        {/* <DisplayCard link="/" title="Total Topics" amount={topicsNumber} /> */}
       </div>
     </div>
   );
